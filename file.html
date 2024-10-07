@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Liveshot</title>
+  <title>Website Video Autoplay Fullscreen</title>
+  <style>
+    body {
+      margin: 0; /* Menghilangkan margin default browser */
+      overflow: hidden; /* Menyembunyikan scrollbar */
+    }
+
+    video {
+      position: fixed; /* Memposisikan video agar tetap di tempatnya */
+      top: 0;
+      left: 0;
+      width: 100%; 
+      height: 100%;
+      object-fit: cover; /* Menyesuaikan video dengan layar, mungkin ada bagian yang terpotong */
+    }
+  </style>
 </head>
 <body>
 
-  <video width="640" height="360" autoplay muted controls>
+  <video autoplay muted controls>
     <source src="lv_0_20241007125645.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
