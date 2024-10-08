@@ -25,17 +25,25 @@
   <script>
     document.addEventListener('DOMContentLoaded', (event) => {
       var video = document.getElementById("myVideo");
-      video.play();
 
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
-      } else if (video.mozRequestFullScreen) { /* Firefox */
-        video.mozRequestFullScreen();
-      } else if (video.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-        video.webkitRequestFullscreen();
-      } else if (video.msRequestFullscreen) { /* IE/Edge */
-        video.msRequestFullscreen();
+      // Fungsi untuk menjalankan fullscreen
+      function goFullscreen() {
+        if (video.requestFullscreen) {
+          video.requestFullscreen();
+        } else if (video.mozRequestFullScreen) { /* Firefox */
+          video.mozRequestFullScreen();
+        } else if (video.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+          video.webkitRequestFullscreen();
+        } else if (video.msRequestFullscreen) { /* IE/Edge */
+          video.msRequestFullscreen();
+        }
       }
+
+      // Event listener untuk menjalankan video dan fullscreen setelah data video cukup
+      video.addEventListener('loadeddata', (event) => {
+        video.play();
+        goFullscreen();
+      });
     });
   </script>
 
