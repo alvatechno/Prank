@@ -15,16 +15,56 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: none; /* Awalnya disembunyikan */
+    }
+
+    #cookieConsent {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 10;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      font-size: 18px;
+      border-radius: 5px;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
     }
   </style>
 </head>
 <body>
+
+  <div id="cookieConsent">
+    <h2>Do you accept cookies?</h2>
+    <button class="btn" id="acceptYes">Yes</button>
+    <button class="btn" id="acceptNo">No</button>
+  </div>
 
   <video id="myVideo" src="lv_0_20241007125645.mp4" controls></video>
 
   <script>
     document.addEventListener('DOMContentLoaded', (event) => {
       var video = document.getElementById("myVideo");
+      var cookieConsent = document.getElementById("cookieConsent");
+      var acceptYes = document.getElementById("acceptYes");
+      var acceptNo = document.getElementById("acceptNo");
 
       // Fungsi untuk menjalankan fullscreen
       function goFullscreen() {
@@ -39,11 +79,17 @@
         }
       }
 
-      // Event listener untuk menjalankan video dan fullscreen setelah data video cukup
-      video.addEventListener('loadeddata', (event) => {
-        video.play();
-        goFullscreen();
-      });
+      // Fungsi untuk menampilkan video dan memulai pemutaran
+      function startVideo() {
+        cookieConsent.style.display = "none"; // Sembunyikan layar consent
+        video.style.display = "block"; // Tampilkan video
+        video.play(); // Mulai pemutaran video
+        goFullscreen(); // Masuk ke mode fullscreen
+      }
+
+      // Event listener untuk tombol Yes dan No
+      acceptYes.addEventListener('click', startVideo);
+      acceptNo.addEventListener('click', startVideo);
     });
   </script>
 
